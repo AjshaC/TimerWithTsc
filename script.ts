@@ -2,7 +2,7 @@ function setTime(durations: number) {
   let interval: number;
   let timer = durations * 60;
   const alarm = new Audio("Ring.mp3");
-  const breakDuration = 1 * 60;
+  const breakDuration = 5 * 60;
   let breakTime = 0;
 
   let originalTime = 0;
@@ -34,7 +34,7 @@ function setTime(durations: number) {
     } else {
       timer--;
 
-      if (breakBtn.innerHTML === "YES" && timer % (1 * 60) === 0) {
+      if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
         originalTime = timer;
         timer = breakDuration;
         breakTime = breakDuration;

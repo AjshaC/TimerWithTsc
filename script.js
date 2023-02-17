@@ -2,7 +2,7 @@ function setTime(durations) {
     var interval;
     var timer = durations * 60;
     var alarm = new Audio("Ring.mp3");
-    var breakDuration = 1 * 60;
+    var breakDuration = 5 * 60;
     var breakTime = 0;
     var originalTime = 0;
     var breakBtn = document.querySelector(".breakBtn");
@@ -24,7 +24,7 @@ function setTime(durations) {
         }
         else {
             timer--;
-            if (breakBtn.innerHTML === "YES" && timer % (1 * 60) === 0) {
+            if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
                 originalTime = timer;
                 timer = breakDuration;
                 breakTime = breakDuration;
