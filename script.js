@@ -28,6 +28,7 @@ function setTime(durations) {
                 originalTime = timer;
                 timer = breakDuration;
                 breakTime = breakDuration;
+                alarm.play();
                 console.log("Break Started");
                 timerDisplay.innerHTML += " (Break)";
             }
@@ -65,10 +66,12 @@ function setTime(durations) {
     twoHoursBtn.addEventListener("click", function () {
         timer = 7200;
         timerDisplay.innerHTML = "2h 0m 0s";
+        alarm.play();
     });
     thirtMinBtn.addEventListener("click", function () {
         timer = 1800;
         timerDisplay.innerHTML = "0h 30m 0s";
+        alarm.play();
     });
     breakBtn.addEventListener("click", function () {
         breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
