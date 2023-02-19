@@ -134,6 +134,7 @@ function setTime(durations: number) {
     clearInterval(interval);
     timerDisplay.innerHTML = "";
     timer = durations * 0;
+    timerDisplay.innerHTML = "Start Over";
     disableDurationButtons(false, this);
 
     breakTime = 0;

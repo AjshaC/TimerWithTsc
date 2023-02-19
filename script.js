@@ -96,6 +96,7 @@ function setTime(durations) {
         clearInterval(interval);
         timerDisplay.innerHTML = "";
         timer = durations * 0;
+        timerDisplay.innerHTML = "Start Over";
         disableDurationButtons(false, _this);
         breakTime = 0;
         savedSettings.forEach(function (setting) {
