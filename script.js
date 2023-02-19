@@ -10,9 +10,20 @@ function setTime(durations) {
     var oneHourBtn = document.querySelector(".oneHourBtn");
     var twoHoursBtn = document.querySelector(".twoHoursBtn");
     var thirtMinBtn = document.querySelector(".thirtMinBtn");
+    var MotivationInput = document.querySelector(".MotivationInput");
+    var TaskSettings = document.querySelector(".TaskSettings");
     var startBtn = document.querySelector(".startBtn");
     var pauseBtn = document.querySelector(".pauseBtn");
     var stopBtn = document.querySelector(".stopBtn");
+    var savedSettings = [];
+    function saveTaskSettings(hours, motivation) {
+        var settings = {
+            hours: hours,
+            motivation: motivation
+        };
+        savedSettings.push(settings);
+        displaySavedTaskSettings();
+    }
     function timerUpdate() {
         var hours = Math.floor(timer / 3600);
         var minutes = Math.floor((timer % 3600) / 60);
@@ -21,6 +32,7 @@ function setTime(durations) {
         if (timer === 0) {
             clearInterval(interval);
             alarm.play();
+            saveTaskSettings(durations, MotivationInput.value);
         }
         else {
             timer--;
@@ -46,11 +58,21 @@ function setTime(durations) {
             }
         }
     }
+    function displaySavedTaskSettings() {
+        var savedSettingsHTML = "";
+        savedSettings.forEach(function (setting) {
+            var timeString = setting.hours === 1 ? "hour" : "hours";
+            savedSettingsHTML += "<div>".concat(setting.hours, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
+        });
+        TaskSettings.innerHTML = savedSettingsHTML;
+    }
     startBtn.addEventListener("click", function () {
         interval = setInterval(timerUpdate, 1000);
+        console.log(savedSettings);
     });
     pauseBtn === null || pauseBtn === void 0 ? void 0 : pauseBtn.addEventListener("click", function () {
         clearInterval(interval);
+        console.log("JJ");
     });
     stopBtn.addEventListener("click", function () {
         clearInterval(interval);
@@ -61,17 +83,14 @@ function setTime(durations) {
     oneHourBtn.addEventListener("click", function () {
         timer = 3600;
         timerDisplay.innerHTML = "1h 0m 0s";
-        alarm.play();
     });
     twoHoursBtn.addEventListener("click", function () {
         timer = 7200;
         timerDisplay.innerHTML = "2h 0m 0s";
-        alarm.play();
     });
     thirtMinBtn.addEventListener("click", function () {
-        timer = 1800;
+        timer = 60; //1800; //60 för att testa 1
         timerDisplay.innerHTML = "0h 30m 0s";
-        alarm.play();
     });
     breakBtn.addEventListener("click", function () {
         breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";

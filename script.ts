@@ -17,9 +17,33 @@ function setTime(durations: number) {
   const thirtMinBtn = document.querySelector(
     ".thirtMinBtn"
   ) as HTMLButtonElement;
+
+  const MotivationInput = document.querySelector(
+    ".MotivationInput"
+  ) as HTMLInputElement;
+
+  const TaskSettings = document.querySelector(".TaskSettings") as HTMLElement;
+
   const startBtn = document.querySelector(".startBtn") as HTMLButtonElement;
   const pauseBtn = document.querySelector(".pauseBtn") as HTMLButtonElement;
   const stopBtn = document.querySelector(".stopBtn") as HTMLButtonElement;
+
+  interface TaskSettings {
+    hours: number;
+    motivation: string;
+  }
+
+  let savedSettings: TaskSettings[] = [];
+
+  function saveTaskSettings(hours: number, motivation: string) {
+    const settings: TaskSettings = {
+      hours,
+      motivation,
+    };
+    savedSettings.push(settings);
+
+    displaySavedTaskSettings();
+  }
 
   function timerUpdate() {
     const hours = Math.floor(timer / 3600);
@@ -31,6 +55,7 @@ function setTime(durations: number) {
     if (timer === 0) {
       clearInterval(interval);
       alarm.play();
+      saveTaskSettings(durations, MotivationInput.value);
     } else {
       timer--;
 
@@ -60,12 +85,24 @@ function setTime(durations: number) {
     }
   }
 
+  function displaySavedTaskSettings() {
+    let savedSettingsHTML = "";
+    savedSettings.forEach((setting) => {
+      const timeString = setting.hours === 1 ? "hour" : "hours";
+      savedSettingsHTML += `<div>${setting.hours} ${timeString} - ${setting.motivation}</div>`;
+    });
+
+    TaskSettings.innerHTML = savedSettingsHTML;
+  }
+
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
+    console.log(savedSettings);
   });
 
   pauseBtn?.addEventListener("click", () => {
     clearInterval(interval);
+    console.log("JJ");
   });
 
   stopBtn.addEventListener("click", () => {
@@ -79,19 +116,16 @@ function setTime(durations: number) {
   oneHourBtn.addEventListener("click", () => {
     timer = 3600;
     timerDisplay.innerHTML = "1h 0m 0s";
-    alarm.play();
   });
 
   twoHoursBtn.addEventListener("click", () => {
     timer = 7200;
     timerDisplay.innerHTML = "2h 0m 0s";
-    alarm.play();
   });
 
   thirtMinBtn.addEventListener("click", () => {
-    timer = 1800;
+    timer = 60; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
-    alarm.play();
   });
 
   breakBtn.addEventListener("click", () => {
