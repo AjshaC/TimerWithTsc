@@ -1,4 +1,5 @@
 function setTime(durations) {
+    var _this = this;
     var interval;
     var timer = durations * 60;
     var alarm = new Audio("Ring.mp3");
@@ -19,7 +20,8 @@ function setTime(durations) {
     function saveTaskSettings(hours, motivation) {
         var settings = {
             hours: hours,
-            motivation: motivation
+            motivation: motivation,
+            stopped: false
         };
         savedSettings.push(settings);
         displaySavedTaskSettings();
@@ -61,14 +63,30 @@ function setTime(durations) {
     function displaySavedTaskSettings() {
         var savedSettingsHTML = "";
         savedSettings.forEach(function (setting) {
-            var timeString = setting.hours === 1 ? "hour" : "hours";
-            savedSettingsHTML += "<div>".concat(setting.hours, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
+            if (!setting.stopped) {
+                var timeString = setting.hours < 60 ? "min" : "hour";
+                var timeValue = setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
+                savedSettingsHTML += "<div>".concat(timeValue, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
+            }
         });
         TaskSettings.innerHTML = savedSettingsHTML;
     }
+    function disableDurationButtons(disable, clickedButton) {
+        var durationBtns = [oneHourBtn, twoHoursBtn, thirtMinBtn];
+        durationBtns.forEach(function (btn) {
+            if (btn !== clickedButton) {
+                btn.disabled = disable;
+                btn.style.opacity = disable ? "0.5" : "1";
+            }
+        });
+    }
     startBtn.addEventListener("click", function () {
         interval = setInterval(timerUpdate, 1000);
+        savedSettings.forEach(function (setting) {
+            setting.stopped = false;
+        });
         console.log(savedSettings);
+        disableDurationButtons(true, _this);
     });
     pauseBtn === null || pauseBtn === void 0 ? void 0 : pauseBtn.addEventListener("click", function () {
         clearInterval(interval);
@@ -77,8 +95,16 @@ function setTime(durations) {
     stopBtn.addEventListener("click", function () {
         clearInterval(interval);
         timerDisplay.innerHTML = "";
-        timer = durations * 60;
+        timer = durations * 0;
+        disableDurationButtons(false, _this);
         breakTime = 0;
+        savedSettings.forEach(function (setting) {
+            if (!setting.stopped) {
+                setting.stopped = true;
+                console.log("true");
+            }
+        });
+        displaySavedTaskSettings();
     });
     oneHourBtn.addEventListener("click", function () {
         timer = 3600;

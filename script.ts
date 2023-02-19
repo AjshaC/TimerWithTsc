@@ -31,6 +31,7 @@ function setTime(durations: number) {
   interface TaskSettings {
     hours: number;
     motivation: string;
+    stopped: boolean;
   }
 
   let savedSettings: TaskSettings[] = [];
@@ -39,6 +40,7 @@ function setTime(durations: number) {
     const settings: TaskSettings = {
       hours,
       motivation,
+      stopped: false,
     };
     savedSettings.push(settings);
 
@@ -88,16 +90,39 @@ function setTime(durations: number) {
   function displaySavedTaskSettings() {
     let savedSettingsHTML = "";
     savedSettings.forEach((setting) => {
-      const timeString = setting.hours === 1 ? "hour" : "hours";
-      savedSettingsHTML += `<div>${setting.hours} ${timeString} - ${setting.motivation}</div>`;
+      if (!setting.stopped) {
+        const timeString = setting.hours < 60 ? "min" : "hour";
+        const timeValue =
+          setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
+        savedSettingsHTML += `<div>${timeValue} ${timeString} - ${setting.motivation}</div>`;
+      }
     });
 
     TaskSettings.innerHTML = savedSettingsHTML;
   }
 
+  function disableDurationButtons(
+    disable: boolean,
+    clickedButton: HTMLButtonElement
+  ) {
+    const durationBtns = [oneHourBtn, twoHoursBtn, thirtMinBtn];
+
+    durationBtns.forEach((btn) => {
+      if (btn !== clickedButton) {
+        btn.disabled = disable;
+        btn.style.opacity = disable ? "0.5" : "1";
+      }
+    });
+  }
+
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
+
+    savedSettings.forEach((setting) => {
+      setting.stopped = false;
+    });
     console.log(savedSettings);
+    disableDurationButtons(true, this);
   });
 
   pauseBtn?.addEventListener("click", () => {
@@ -108,9 +133,18 @@ function setTime(durations: number) {
   stopBtn.addEventListener("click", () => {
     clearInterval(interval);
     timerDisplay.innerHTML = "";
-    timer = durations * 60;
+    timer = durations * 0;
+    disableDurationButtons(false, this);
 
     breakTime = 0;
+
+    savedSettings.forEach((setting) => {
+      if (!setting.stopped) {
+        setting.stopped = true;
+        console.log("true");
+      }
+    });
+    displaySavedTaskSettings();
   });
 
   oneHourBtn.addEventListener("click", () => {
