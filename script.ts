@@ -36,6 +36,15 @@ function setTime(durations: number) {
 
   let savedSettings: TaskSettings[] = [];
 
+  // (function Init() {
+  //   const TaskCompleted = localStorage.getItem("TaskCompleted");
+  //   if (TaskCompleted) {
+  //     savedSettings = JSON.parse(TaskCompleted);
+  //   }
+  // })();
+
+  //let TaskCompleted = JSON.parse(localStorage.getItem("TaskCompleted"));
+
   function saveTaskSettings(hours: number, motivation: string) {
     const settings: TaskSettings = {
       hours,
@@ -43,6 +52,7 @@ function setTime(durations: number) {
       stopped: false,
     };
     savedSettings.push(settings);
+    //localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
 
     displaySavedTaskSettings();
   }
@@ -57,6 +67,8 @@ function setTime(durations: number) {
     if (timer === 0) {
       clearInterval(interval);
       alarm.play();
+      localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
+
       saveTaskSettings(durations, MotivationInput.value);
     } else {
       timer--;
@@ -87,8 +99,17 @@ function setTime(durations: number) {
     }
   }
 
+  displaySavedTaskSettings();
   function displaySavedTaskSettings() {
     let savedSettingsHTML = "";
+    let CompletedTask = localStorage.getItem("TaskComplitetd");
+
+    if (CompletedTask === null) {
+      savedSettings = [];
+    } else {
+      savedSettings = JSON.parse(CompletedTask);
+    }
+
     savedSettings.forEach((setting) => {
       if (!setting.stopped) {
         const timeString = setting.hours < 60 ? "min" : "hour";

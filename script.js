@@ -17,6 +17,13 @@ function setTime(durations) {
     var pauseBtn = document.querySelector(".pauseBtn");
     var stopBtn = document.querySelector(".stopBtn");
     var savedSettings = [];
+    // (function Init() {
+    //   const TaskCompleted = localStorage.getItem("TaskCompleted");
+    //   if (TaskCompleted) {
+    //     savedSettings = JSON.parse(TaskCompleted);
+    //   }
+    // })();
+    //let TaskCompleted = JSON.parse(localStorage.getItem("TaskCompleted"));
     function saveTaskSettings(hours, motivation) {
         var settings = {
             hours: hours,
@@ -24,6 +31,7 @@ function setTime(durations) {
             stopped: false
         };
         savedSettings.push(settings);
+        //localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
         displaySavedTaskSettings();
     }
     function timerUpdate() {
@@ -34,6 +42,7 @@ function setTime(durations) {
         if (timer === 0) {
             clearInterval(interval);
             alarm.play();
+            localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
             saveTaskSettings(durations, MotivationInput.value);
         }
         else {
@@ -60,8 +69,17 @@ function setTime(durations) {
             }
         }
     }
+    function HELP() { }
+    displaySavedTaskSettings();
     function displaySavedTaskSettings() {
         var savedSettingsHTML = "";
+        var CompletedTask = localStorage.getItem("TaskComplitetd");
+        if (CompletedTask === null) {
+            savedSettings = [];
+        }
+        else {
+            savedSettings = JSON.parse(CompletedTask);
+        }
         savedSettings.forEach(function (setting) {
             if (!setting.stopped) {
                 var timeString = setting.hours < 60 ? "min" : "hour";
