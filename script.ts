@@ -52,7 +52,7 @@ function setTime(durations: number) {
       stopped: false,
     };
     savedSettings.push(settings);
-    //localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
+    localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
 
     displaySavedTaskSettings();
   }
@@ -68,7 +68,7 @@ function setTime(durations: number) {
       clearInterval(interval);
       alarm.play();
       localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
-
+      disableDurationButtons(false, this);
       saveTaskSettings(durations, MotivationInput.value);
     } else {
       timer--;
@@ -85,8 +85,6 @@ function setTime(durations: number) {
       if (breakTime > 0) {
         timerDisplay.innerHTML = `${breakTime} seconds left for break`;
         breakTime--;
-      } else if (timer % 60 === 0) {
-        timerDisplay.innerHTML += " (Work)";
       }
 
       if (breakTime === 0 && originalTime > 0) {
@@ -103,12 +101,16 @@ function setTime(durations: number) {
   function displaySavedTaskSettings() {
     let savedSettingsHTML = "";
     let CompletedTask = localStorage.getItem("TaskComplitetd");
-
+    let savedSettings;
     if (CompletedTask === null) {
       savedSettings = [];
     } else {
       savedSettings = JSON.parse(CompletedTask);
     }
+
+    setTimeout(() => {
+      localStorage.removeItem("TaskComplitetd");
+    }, 12 * 60 * 60 * 1000);
 
     savedSettings.forEach((setting) => {
       if (!setting.stopped) {
@@ -138,7 +140,8 @@ function setTime(durations: number) {
 
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
-
+    breakBtn.style.opacity = "0";
+    breakBtn.style.color = "black";
     savedSettings.forEach((setting) => {
       setting.stopped = false;
     });
