@@ -69,7 +69,6 @@ function setTime(durations) {
             }
         }
     }
-    function HELP() { }
     displaySavedTaskSettings();
     function displaySavedTaskSettings() {
         var savedSettingsHTML = "";
