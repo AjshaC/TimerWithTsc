@@ -28,6 +28,8 @@ function setTime(durations: number) {
   const pauseBtn = document.querySelector(".pauseBtn") as HTMLButtonElement;
   const stopBtn = document.querySelector(".stopBtn") as HTMLButtonElement;
 
+  startBtn.disabled = true;
+
   interface TaskSettings {
     hours: number;
     motivation: string;
@@ -145,6 +147,7 @@ function setTime(durations: number) {
     savedSettings.forEach((setting) => {
       setting.stopped = false;
     });
+
     console.log(savedSettings);
     disableDurationButtons(true, this);
   });
@@ -159,6 +162,7 @@ function setTime(durations: number) {
     timerDisplay.innerHTML = "";
     timer = durations * 0;
     timerDisplay.innerHTML = "Start Over";
+    startBtn.disabled = true;
     //breakBtn.style.opacity = "1";
     disableDurationButtons(false, this);
 
@@ -170,22 +174,25 @@ function setTime(durations: number) {
         console.log("true");
       }
     });
-    displaySavedTaskSettings();
+    // displaySavedTaskSettings();
   });
 
   oneHourBtn.addEventListener("click", () => {
     timer = 3600;
     timerDisplay.innerHTML = "1h 0m 0s";
+    startBtn.disabled = false;
   });
 
   twoHoursBtn.addEventListener("click", () => {
     timer = 7200;
     timerDisplay.innerHTML = "2h 0m 0s";
+    startBtn.disabled = false;
   });
 
   thirtMinBtn.addEventListener("click", () => {
-    timer = 60; //1800; //60 för att testa 1
+    timer = 1800; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
+    startBtn.disabled = false;
   });
 
   breakBtn.addEventListener("click", () => {

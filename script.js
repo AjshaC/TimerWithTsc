@@ -17,6 +17,7 @@ function setTime(durations) {
     var startBtn = document.querySelector(".startBtn");
     var pauseBtn = document.querySelector(".pauseBtn");
     var stopBtn = document.querySelector(".stopBtn");
+    startBtn.disabled = true;
     var savedSettings = [];
     // (function Init() {
     //   const TaskCompleted = localStorage.getItem("TaskCompleted");
@@ -118,6 +119,7 @@ function setTime(durations) {
         timerDisplay.innerHTML = "";
         timer = durations * 0;
         timerDisplay.innerHTML = "Start Over";
+        startBtn.disabled = true;
         //breakBtn.style.opacity = "1";
         disableDurationButtons(false, _this);
         breakTime = 0;
@@ -127,19 +129,22 @@ function setTime(durations) {
                 console.log("true");
             }
         });
-        displaySavedTaskSettings();
+        // displaySavedTaskSettings();
     });
     oneHourBtn.addEventListener("click", function () {
         timer = 3600;
         timerDisplay.innerHTML = "1h 0m 0s";
+        startBtn.disabled = false;
     });
     twoHoursBtn.addEventListener("click", function () {
         timer = 7200;
         timerDisplay.innerHTML = "2h 0m 0s";
+        startBtn.disabled = false;
     });
     thirtMinBtn.addEventListener("click", function () {
-        timer = 60; //1800; //60 för att testa 1
+        timer = 1800; //1800; //60 för att testa 1
         timerDisplay.innerHTML = "0h 30m 0s";
+        startBtn.disabled = false;
     });
     breakBtn.addEventListener("click", function () {
         breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
