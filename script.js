@@ -124,6 +124,7 @@ function setTime(durations) {
         clearInterval(interval);
         timerDisplay.innerHTML = "";
         timer = durations * 0;
+        MotivationInput.disabled = false;
         timerDisplay.innerHTML = "Start Over";
         startBtn.disabled = true;
         //breakBtn.style.opacity = "1";

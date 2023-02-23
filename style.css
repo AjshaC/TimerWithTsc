@@ -31,12 +31,12 @@ body {
   border: 2px solid #ccc;
   position: absolute;
   border-radius: 50%;
-  /* animation: circle14512 3s linear infinite; */
+
   animation: none;
 }
 
 .circle.animate {
-  animation: circle14512 3s linear infinite;
+  animation: circle14512 60s linear infinite;
 }
 
 .circle::before {
@@ -82,10 +82,12 @@ body {
 .SavedTasks {
   width: 20%;
   text-align: center;
+  background-color: rgb(173, 173, 173);
+  padding-top: 15px;
 }
 
 .TaskSettings {
-  border: 1px solid red;
+  background-color: #ccc;
 }
 
 .containerOne {
