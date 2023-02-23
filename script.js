@@ -7,6 +7,7 @@ function setTime(durations) {
     var breakTime = 0;
     var originalTime = 0;
     var breakBtn = document.querySelector(".breakBtn");
+    breakBtn.style.opacity = "0";
     var timerDisplay = document.querySelector(".timerDisplay");
     var oneHourBtn = document.querySelector(".oneHourBtn");
     var twoHoursBtn = document.querySelector(".twoHoursBtn");
@@ -101,8 +102,7 @@ function setTime(durations) {
     }
     startBtn.addEventListener("click", function () {
         interval = setInterval(timerUpdate, 1000);
-        breakBtn.style.opacity = "0";
-        breakBtn.style.color = "black";
+        // breakBtn.style.opacity = "0";
         savedSettings.forEach(function (setting) {
             setting.stopped = false;
         });
@@ -118,6 +118,7 @@ function setTime(durations) {
         timerDisplay.innerHTML = "";
         timer = durations * 0;
         timerDisplay.innerHTML = "Start Over";
+        //breakBtn.style.opacity = "1";
         disableDurationButtons(false, _this);
         breakTime = 0;
         savedSettings.forEach(function (setting) {

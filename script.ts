@@ -8,7 +8,7 @@ function setTime(durations: number) {
   let originalTime = 0;
 
   const breakBtn = document.querySelector(".breakBtn") as HTMLButtonElement;
-
+  breakBtn.style.opacity = "0";
   const timerDisplay = document.querySelector(".timerDisplay") as HTMLElement;
   const oneHourBtn = document.querySelector(".oneHourBtn") as HTMLButtonElement;
   const twoHoursBtn = document.querySelector(
@@ -140,8 +140,8 @@ function setTime(durations: number) {
 
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
-    breakBtn.style.opacity = "0";
-    breakBtn.style.color = "black";
+    // breakBtn.style.opacity = "0";
+
     savedSettings.forEach((setting) => {
       setting.stopped = false;
     });
@@ -159,6 +159,7 @@ function setTime(durations: number) {
     timerDisplay.innerHTML = "";
     timer = durations * 0;
     timerDisplay.innerHTML = "Start Over";
+    //breakBtn.style.opacity = "1";
     disableDurationButtons(false, this);
 
     breakTime = 0;
