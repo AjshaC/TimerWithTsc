@@ -9,3 +9,124 @@ body {
   height: 100vh;
   display: flex;
 }
+
+/*Animation*/
+
+.loader {
+  background: transparent;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.circle {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ccc;
+  position: absolute;
+  border-radius: 50%;
+  /* animation: circle14512 3s linear infinite; */
+  animation: none;
+}
+
+.circle.animate {
+  animation: circle14512 3s linear infinite;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #9ae932;
+  box-shadow: 0 0 20px #9ae932, 0 0 60px #9ae932;
+}
+
+@keyframes circle14512 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.timerDisplay {
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  font-size: 45px;
+}
+
+.Content-container {
+  width: 80%;
+  border: 2px solid royalblue;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.SavedTasks {
+  width: 20%;
+  text-align: center;
+}
+
+.TaskSettings {
+  border: 1px solid red;
+}
+
+.containerOne {
+  display: flex;
+  width: 70%;
+}
+
+.containertwo {
+  display: flex;
+  width: 50%;
+}
+.oneHourBtn,
+.twoHoursBtn,
+.thirtMinBtn {
+  margin: 10px;
+  width: 100%;
+  height: 35px;
+  border-radius: 20px;
+}
+
+.startBtn,
+.pauseBtn,
+.stopBtn {
+  width: 100%;
+  margin-left: 15px;
+  height: 35px;
+  border-radius: 50px;
+}
+
+.Motivation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MotivationInput {
+  position: absolute;
+  top: 10%;
+  border: none;
+  border-bottom: 1px solid red;
+  width: 50%;
+  font-size: 30px;
+  text-align: center;
+}

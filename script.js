@@ -17,6 +17,7 @@ function setTime(durations) {
     var startBtn = document.querySelector(".startBtn");
     var pauseBtn = document.querySelector(".pauseBtn");
     var stopBtn = document.querySelector(".stopBtn");
+    var circle = document.querySelector(".circle");
     startBtn.disabled = true;
     var savedSettings = [];
     // (function Init() {
@@ -44,6 +45,7 @@ function setTime(durations) {
         if (timer === 0) {
             clearInterval(interval);
             alarm.play();
+            circle.classList.remove("animate");
             localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
             disableDurationButtons(false, this);
             saveTaskSettings(durations, MotivationInput.value);
@@ -106,6 +108,7 @@ function setTime(durations) {
         // breakBtn.style.opacity = "0";
         MotivationInput.disabled = true;
         startBtn.disabled = true;
+        circle.classList.add("animate");
         savedSettings.forEach(function (setting) {
             setting.stopped = false;
         });
@@ -114,7 +117,8 @@ function setTime(durations) {
     });
     pauseBtn === null || pauseBtn === void 0 ? void 0 : pauseBtn.addEventListener("click", function () {
         clearInterval(interval);
-        console.log("JJ");
+        startBtn.disabled = false;
+        circle.classList.remove("animate");
     });
     stopBtn.addEventListener("click", function () {
         clearInterval(interval);
@@ -124,6 +128,7 @@ function setTime(durations) {
         startBtn.disabled = true;
         //breakBtn.style.opacity = "1";
         disableDurationButtons(false, _this);
+        circle.classList.remove("animate");
         breakTime = 0;
         savedSettings.forEach(function (setting) {
             if (!setting.stopped) {

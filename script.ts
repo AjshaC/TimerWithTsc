@@ -28,6 +28,8 @@ function setTime(durations: number) {
   const pauseBtn = document.querySelector(".pauseBtn") as HTMLButtonElement;
   const stopBtn = document.querySelector(".stopBtn") as HTMLButtonElement;
 
+  let circle = document.querySelector(".circle") as HTMLHRElement;
+
   startBtn.disabled = true;
 
   interface TaskSettings {
@@ -69,6 +71,7 @@ function setTime(durations: number) {
     if (timer === 0) {
       clearInterval(interval);
       alarm.play();
+      circle.classList.remove("animate");
       localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
       disableDurationButtons(false, this);
       saveTaskSettings(durations, MotivationInput.value);
@@ -145,6 +148,7 @@ function setTime(durations: number) {
     // breakBtn.style.opacity = "0";
     MotivationInput.disabled = true;
     startBtn.disabled = true;
+    circle.classList.add("animate");
     savedSettings.forEach((setting) => {
       setting.stopped = false;
     });
@@ -155,7 +159,8 @@ function setTime(durations: number) {
 
   pauseBtn?.addEventListener("click", () => {
     clearInterval(interval);
-    console.log("JJ");
+    startBtn.disabled = false;
+    circle.classList.remove("animate");
   });
 
   stopBtn.addEventListener("click", () => {
@@ -166,7 +171,7 @@ function setTime(durations: number) {
     startBtn.disabled = true;
     //breakBtn.style.opacity = "1";
     disableDurationButtons(false, this);
-
+    circle.classList.remove("animate");
     breakTime = 0;
 
     savedSettings.forEach((setting) => {
