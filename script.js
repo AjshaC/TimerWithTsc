@@ -104,6 +104,8 @@ function setTime(durations) {
     startBtn.addEventListener("click", function () {
         interval = setInterval(timerUpdate, 1000);
         // breakBtn.style.opacity = "0";
+        MotivationInput.disabled = true;
+        startBtn.disabled = true;
         savedSettings.forEach(function (setting) {
             setting.stopped = false;
         });

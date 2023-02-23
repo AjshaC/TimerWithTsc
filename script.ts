@@ -143,7 +143,8 @@ function setTime(durations: number) {
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
     // breakBtn.style.opacity = "0";
-
+    MotivationInput.disabled = true;
+    startBtn.disabled = true;
     savedSettings.forEach((setting) => {
       setting.stopped = false;
     });
