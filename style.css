@@ -14,8 +14,8 @@ body {
 
 .loader {
   background: transparent;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   position: relative;
   display: flex;
@@ -26,8 +26,8 @@ body {
 }
 
 .circle {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border: 2px solid #ccc;
   position: absolute;
   border-radius: 50%;
@@ -64,14 +64,14 @@ body {
 
 .timerDisplay {
   position: absolute;
-  top: 45%;
+  top: 43%;
   transform: translate(-50%, -50%);
   font-size: 45px;
 }
 
 .Content-container {
   width: 80%;
-  border: 2px solid royalblue;
+
   align-items: center;
   justify-content: center;
   display: flex;
