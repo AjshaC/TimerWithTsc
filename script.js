@@ -17,6 +17,7 @@ function setTime(durations) {
     var startBtn = document.querySelector(".startBtn");
     var pauseBtn = document.querySelector(".pauseBtn");
     var stopBtn = document.querySelector(".stopBtn");
+    var containerOne = document.querySelector(".containerOne");
     var circle = document.querySelector(".circle");
     startBtn.disabled = true;
     var savedSettings = [];
@@ -106,6 +107,7 @@ function setTime(durations) {
     startBtn.addEventListener("click", function () {
         interval = setInterval(timerUpdate, 1000);
         // breakBtn.style.opacity = "0";
+        containerOne.classList.add("animate");
         MotivationInput.disabled = true;
         startBtn.disabled = true;
         circle.classList.add("animate");
@@ -124,6 +126,7 @@ function setTime(durations) {
         clearInterval(interval);
         timerDisplay.innerHTML = "";
         timer = durations * 0;
+        containerOne.classList.remove("animate");
         MotivationInput.disabled = false;
         timerDisplay.innerHTML = "Start Over";
         startBtn.disabled = true;

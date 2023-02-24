@@ -27,6 +27,9 @@ function setTime(durations: number) {
   const startBtn = document.querySelector(".startBtn") as HTMLButtonElement;
   const pauseBtn = document.querySelector(".pauseBtn") as HTMLButtonElement;
   const stopBtn = document.querySelector(".stopBtn") as HTMLButtonElement;
+  const containerOne = document.querySelector(
+    ".containerOne"
+  ) as HTMLButtonElement;
 
   let circle = document.querySelector(".circle") as HTMLHRElement;
 
@@ -138,6 +141,7 @@ function setTime(durations: number) {
     durationBtns.forEach((btn) => {
       if (btn !== clickedButton) {
         btn.disabled = disable;
+
         btn.style.opacity = disable ? "0.5" : "1";
       }
     });
@@ -146,6 +150,7 @@ function setTime(durations: number) {
   startBtn.addEventListener("click", () => {
     interval = setInterval(timerUpdate, 1000);
     // breakBtn.style.opacity = "0";
+    containerOne.classList.add("animate");
     MotivationInput.disabled = true;
     startBtn.disabled = true;
     circle.classList.add("animate");
@@ -167,6 +172,7 @@ function setTime(durations: number) {
     clearInterval(interval);
     timerDisplay.innerHTML = "";
     timer = durations * 0;
+    containerOne.classList.remove("animate");
     MotivationInput.disabled = false;
     timerDisplay.innerHTML = "Start Over";
     startBtn.disabled = true;

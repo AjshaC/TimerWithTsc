@@ -107,6 +107,20 @@ body {
 .containerOne {
   display: flex;
   width: 70%;
+  animation: none;
+}
+
+.containerOne.animate {
+  animation: fadeOut 1s ease-out forwards;
+  opacity: 1;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .containertwo {
@@ -121,6 +135,18 @@ body {
   height: 35px;
   border-radius: 20px;
 }
+
+/* #fade-out {
+  animation: fadeOut 1s ease-out forwards;
+  opacity: 1;
+} */
+
+/* animation: none;
+}
+
+.circle.animate {
+  animation: circle14512 60s linear infinite;
+} */
 
 .startBtn,
 .pauseBtn,
