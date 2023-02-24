@@ -7,8 +7,8 @@ function setTime(durations: number) {
 
   let originalTime = 0;
 
-  const breakBtn = document.querySelector(".breakBtn") as HTMLButtonElement;
-  breakBtn.style.opacity = "0";
+  //const breakBtn = document.querySelector(".breakBtn") as HTMLButtonElement;
+  //breakBtn.style.opacity = "0";
   const timerDisplay = document.querySelector(".timerDisplay") as HTMLElement;
   const oneHourBtn = document.querySelector(".oneHourBtn") as HTMLButtonElement;
   const twoHoursBtn = document.querySelector(
@@ -65,6 +65,8 @@ function setTime(durations: number) {
     if (timer === 0) {
       clearInterval(interval);
       alarm.play();
+      containerOne.classList.remove("animate");
+      containerOne.classList.add("animateFadeIn");
       circle.classList.remove("animate");
       localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
       disableDurationButtons(false, this);
@@ -72,27 +74,27 @@ function setTime(durations: number) {
     } else {
       timer--;
 
-      if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
-        originalTime = timer;
-        timer = breakDuration;
-        breakTime = breakDuration;
-        alarm.play();
-        console.log("Break Started");
-        timerDisplay.innerHTML += " (Break)";
-      }
+      // if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
+      //   originalTime = timer;
+      //   timer = breakDuration;
+      //   breakTime = breakDuration;
+      //   alarm.play();
+      //   console.log("Break Started");
+      //   timerDisplay.innerHTML += " (Break)";
+      // }
 
-      if (breakTime > 0) {
-        timerDisplay.innerHTML = `${breakTime} seconds left for break`;
-        breakTime--;
-      }
+      // if (breakTime > 0) {
+      //   timerDisplay.innerHTML = `${breakTime} seconds left for break`;
+      //   breakTime--;
+      // }
 
-      if (breakTime === 0 && originalTime > 0) {
-        timer = originalTime;
-        originalTime = 0;
-        timerDisplay.innerHTML = `${Math.floor(timer / 3600)}h ${Math.floor(
-          (timer % 3600) / 60
-        )}m ${Math.floor(timer % 60)}s`;
-      }
+      // if (breakTime === 0 && originalTime > 0) {
+      //   timer = originalTime;
+      //   originalTime = 0;
+      //   timerDisplay.innerHTML = `${Math.floor(timer / 3600)}h ${Math.floor(
+      //     (timer % 3600) / 60
+      //   )}m ${Math.floor(timer % 60)}s`;
+      // }
     }
   }
 
@@ -116,7 +118,7 @@ function setTime(durations: number) {
         const timeString = setting.hours < 60 ? "min" : "hour";
         const timeValue =
           setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
-        savedSettingsHTML += `<div>${timeValue} ${timeString} - ${setting.motivation}</div>`;
+        savedSettingsHTML += `<div class="task-Done">${timeValue} ${timeString} - ${setting.motivation}</div>`;
       }
     });
 
@@ -188,11 +190,11 @@ function setTime(durations: number) {
         console.log("true");
       }
     });
-    // displaySavedTaskSettings();
+    displaySavedTaskSettings();
   });
 
   oneHourBtn.addEventListener("click", () => {
-    timer = 3600;
+    timer = 3600; //3600
     timerDisplay.innerHTML = "1h 0m 0s";
 
     startBtn.style.opacity = "1";
@@ -200,7 +202,7 @@ function setTime(durations: number) {
   });
 
   twoHoursBtn.addEventListener("click", () => {
-    timer = 7200;
+    timer = 7200; //7200
     timerDisplay.innerHTML = "2h 0m 0s";
 
     startBtn.disabled = false;
@@ -214,9 +216,9 @@ function setTime(durations: number) {
     startBtn.disabled = false;
   });
 
-  breakBtn.addEventListener("click", () => {
-    breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
-  });
+  // breakBtn.addEventListener("click", () => {
+  // breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
+  // });
 }
 
 setTime(30);

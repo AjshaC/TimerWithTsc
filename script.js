@@ -6,8 +6,8 @@ function setTime(durations) {
     var breakDuration = 5 * 60;
     var breakTime = 0;
     var originalTime = 0;
-    var breakBtn = document.querySelector(".breakBtn");
-    breakBtn.style.opacity = "0";
+    //const breakBtn = document.querySelector(".breakBtn") as HTMLButtonElement;
+    //breakBtn.style.opacity = "0";
     var timerDisplay = document.querySelector(".timerDisplay");
     var oneHourBtn = document.querySelector(".oneHourBtn");
     var twoHoursBtn = document.querySelector(".twoHoursBtn");
@@ -39,6 +39,8 @@ function setTime(durations) {
         if (timer === 0) {
             clearInterval(interval);
             alarm.play();
+            containerOne.classList.remove("animate");
+            containerOne.classList.add("animateFadeIn");
             circle.classList.remove("animate");
             localStorage.setItem("TaskComplitetd", JSON.stringify(savedSettings));
             disableDurationButtons(false, this);
@@ -46,23 +48,25 @@ function setTime(durations) {
         }
         else {
             timer--;
-            if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
-                originalTime = timer;
-                timer = breakDuration;
-                breakTime = breakDuration;
-                alarm.play();
-                console.log("Break Started");
-                timerDisplay.innerHTML += " (Break)";
-            }
-            if (breakTime > 0) {
-                timerDisplay.innerHTML = "".concat(breakTime, " seconds left for break");
-                breakTime--;
-            }
-            if (breakTime === 0 && originalTime > 0) {
-                timer = originalTime;
-                originalTime = 0;
-                timerDisplay.innerHTML = "".concat(Math.floor(timer / 3600), "h ").concat(Math.floor((timer % 3600) / 60), "m ").concat(Math.floor(timer % 60), "s");
-            }
+            // if (breakBtn.innerHTML === "YES" && timer % (25 * 60) === 0) {
+            //   originalTime = timer;
+            //   timer = breakDuration;
+            //   breakTime = breakDuration;
+            //   alarm.play();
+            //   console.log("Break Started");
+            //   timerDisplay.innerHTML += " (Break)";
+            // }
+            // if (breakTime > 0) {
+            //   timerDisplay.innerHTML = `${breakTime} seconds left for break`;
+            //   breakTime--;
+            // }
+            // if (breakTime === 0 && originalTime > 0) {
+            //   timer = originalTime;
+            //   originalTime = 0;
+            //   timerDisplay.innerHTML = `${Math.floor(timer / 3600)}h ${Math.floor(
+            //     (timer % 3600) / 60
+            //   )}m ${Math.floor(timer % 60)}s`;
+            // }
         }
     }
     displaySavedTaskSettings();
@@ -83,7 +87,7 @@ function setTime(durations) {
             if (!setting.stopped) {
                 var timeString = setting.hours < 60 ? "min" : "hour";
                 var timeValue = setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
-                savedSettingsHTML += "<div>".concat(timeValue, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
+                savedSettingsHTML += "<div class=\"task-Done\">".concat(timeValue, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
             }
         });
         TaskSettings.innerHTML = savedSettingsHTML;
@@ -138,16 +142,16 @@ function setTime(durations) {
                 console.log("true");
             }
         });
-        // displaySavedTaskSettings();
+        displaySavedTaskSettings();
     });
     oneHourBtn.addEventListener("click", function () {
-        timer = 3600;
+        timer = 3600; //3600
         timerDisplay.innerHTML = "1h 0m 0s";
         startBtn.style.opacity = "1";
         startBtn.disabled = false;
     });
     twoHoursBtn.addEventListener("click", function () {
-        timer = 7200;
+        timer = 7200; //7200
         timerDisplay.innerHTML = "2h 0m 0s";
         startBtn.disabled = false;
     });
@@ -157,8 +161,8 @@ function setTime(durations) {
         startBtn.style.opacity = "1";
         startBtn.disabled = false;
     });
-    breakBtn.addEventListener("click", function () {
-        breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
-    });
+    // breakBtn.addEventListener("click", () => {
+    // breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
+    // });
 }
 setTime(30);
