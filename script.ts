@@ -43,15 +43,6 @@ function setTime(durations: number) {
 
   let savedSettings: TaskSettings[] = [];
 
-  // (function Init() {
-  //   const TaskCompleted = localStorage.getItem("TaskCompleted");
-  //   if (TaskCompleted) {
-  //     savedSettings = JSON.parse(TaskCompleted);
-  //   }
-  // })();
-
-  //let TaskCompleted = JSON.parse(localStorage.getItem("TaskCompleted"));
-
   function saveTaskSettings(hours: number, motivation: string) {
     const settings: TaskSettings = {
       hours,
@@ -141,7 +132,6 @@ function setTime(durations: number) {
     durationBtns.forEach((btn) => {
       if (btn !== clickedButton) {
         btn.disabled = disable;
-
         btn.style.opacity = disable ? "0.5" : "1";
       }
     });
@@ -151,8 +141,11 @@ function setTime(durations: number) {
     interval = setInterval(timerUpdate, 1000);
     // breakBtn.style.opacity = "0";
     containerOne.classList.add("animate");
+    containerOne.classList.remove("animateFadeIn");
     MotivationInput.disabled = true;
+
     startBtn.disabled = true;
+
     circle.classList.add("animate");
     savedSettings.forEach((setting) => {
       setting.stopped = false;
@@ -164,7 +157,9 @@ function setTime(durations: number) {
 
   pauseBtn?.addEventListener("click", () => {
     clearInterval(interval);
+
     startBtn.disabled = false;
+
     circle.classList.remove("animate");
   });
 
@@ -173,9 +168,12 @@ function setTime(durations: number) {
     timerDisplay.innerHTML = "";
     timer = durations * 0;
     containerOne.classList.remove("animate");
+    containerOne.classList.add("animateFadeIn");
     MotivationInput.disabled = false;
     timerDisplay.innerHTML = "Start Over";
+
     startBtn.disabled = true;
+
     //breakBtn.style.opacity = "1";
     disableDurationButtons(false, this);
     circle.classList.remove("animate");
@@ -193,18 +191,21 @@ function setTime(durations: number) {
   oneHourBtn.addEventListener("click", () => {
     timer = 3600;
     timerDisplay.innerHTML = "1h 0m 0s";
+
     startBtn.disabled = false;
   });
 
   twoHoursBtn.addEventListener("click", () => {
     timer = 7200;
     timerDisplay.innerHTML = "2h 0m 0s";
+
     startBtn.disabled = false;
   });
 
   thirtMinBtn.addEventListener("click", () => {
     timer = 1800; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
+
     startBtn.disabled = false;
   });
 

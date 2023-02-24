@@ -21,13 +21,6 @@ function setTime(durations) {
     var circle = document.querySelector(".circle");
     startBtn.disabled = true;
     var savedSettings = [];
-    // (function Init() {
-    //   const TaskCompleted = localStorage.getItem("TaskCompleted");
-    //   if (TaskCompleted) {
-    //     savedSettings = JSON.parse(TaskCompleted);
-    //   }
-    // })();
-    //let TaskCompleted = JSON.parse(localStorage.getItem("TaskCompleted"));
     function saveTaskSettings(hours, motivation) {
         var settings = {
             hours: hours,
@@ -108,6 +101,7 @@ function setTime(durations) {
         interval = setInterval(timerUpdate, 1000);
         // breakBtn.style.opacity = "0";
         containerOne.classList.add("animate");
+        containerOne.classList.remove("animateFadeIn");
         MotivationInput.disabled = true;
         startBtn.disabled = true;
         circle.classList.add("animate");
@@ -127,6 +121,7 @@ function setTime(durations) {
         timerDisplay.innerHTML = "";
         timer = durations * 0;
         containerOne.classList.remove("animate");
+        containerOne.classList.add("animateFadeIn");
         MotivationInput.disabled = false;
         timerDisplay.innerHTML = "Start Over";
         startBtn.disabled = true;
