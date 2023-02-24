@@ -90,8 +90,18 @@ body {
   color: white;
 }
 
+.SavedTasks h1 {
+  margin-bottom: 30px;
+}
+
 .TaskSettings {
-  background-color: #ccc;
+  background: rgba(155, 184, 184, 0.5);
+  border: 1px solid #04d8f5;
+  border-radius: 2px;
+  font-size: 20px;
+  padding: 5px;
+
+  margin: 5px;
 }
 
 .containerOne {
@@ -149,8 +159,6 @@ button {
   background-size: 100% auto;
   font-family: inherit;
   font-size: 17px;
-  padding: 0.6em 1.5em;
-  text-align: center;
 }
 
 button:hover {
