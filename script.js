@@ -103,6 +103,7 @@ function setTime(durations) {
         containerOne.classList.add("animate");
         containerOne.classList.remove("animateFadeIn");
         MotivationInput.disabled = true;
+        startBtn.style.opacity = "0.5";
         startBtn.disabled = true;
         circle.classList.add("animate");
         savedSettings.forEach(function (setting) {
@@ -113,6 +114,7 @@ function setTime(durations) {
     });
     pauseBtn === null || pauseBtn === void 0 ? void 0 : pauseBtn.addEventListener("click", function () {
         clearInterval(interval);
+        startBtn.style.opacity = "1";
         startBtn.disabled = false;
         circle.classList.remove("animate");
     });
@@ -124,6 +126,7 @@ function setTime(durations) {
         containerOne.classList.add("animateFadeIn");
         MotivationInput.disabled = false;
         timerDisplay.innerHTML = "Start Over";
+        startBtn.style.opacity = "1";
         startBtn.disabled = true;
         //breakBtn.style.opacity = "1";
         disableDurationButtons(false, _this);
@@ -140,6 +143,7 @@ function setTime(durations) {
     oneHourBtn.addEventListener("click", function () {
         timer = 3600;
         timerDisplay.innerHTML = "1h 0m 0s";
+        startBtn.style.opacity = "1";
         startBtn.disabled = false;
     });
     twoHoursBtn.addEventListener("click", function () {
@@ -150,6 +154,7 @@ function setTime(durations) {
     thirtMinBtn.addEventListener("click", function () {
         timer = 1800; //1800; //60 för att testa 1
         timerDisplay.innerHTML = "0h 30m 0s";
+        startBtn.style.opacity = "1";
         startBtn.disabled = false;
     });
     breakBtn.addEventListener("click", function () {

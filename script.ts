@@ -144,6 +144,7 @@ function setTime(durations: number) {
     containerOne.classList.remove("animateFadeIn");
     MotivationInput.disabled = true;
 
+    startBtn.style.opacity = "0.5";
     startBtn.disabled = true;
 
     circle.classList.add("animate");
@@ -158,6 +159,7 @@ function setTime(durations: number) {
   pauseBtn?.addEventListener("click", () => {
     clearInterval(interval);
 
+    startBtn.style.opacity = "1";
     startBtn.disabled = false;
 
     circle.classList.remove("animate");
@@ -172,6 +174,7 @@ function setTime(durations: number) {
     MotivationInput.disabled = false;
     timerDisplay.innerHTML = "Start Over";
 
+    startBtn.style.opacity = "1";
     startBtn.disabled = true;
 
     //breakBtn.style.opacity = "1";
@@ -192,6 +195,7 @@ function setTime(durations: number) {
     timer = 3600;
     timerDisplay.innerHTML = "1h 0m 0s";
 
+    startBtn.style.opacity = "1";
     startBtn.disabled = false;
   });
 
@@ -206,6 +210,7 @@ function setTime(durations: number) {
     timer = 1800; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
 
+    startBtn.style.opacity = "1";
     startBtn.disabled = false;
   });
 
