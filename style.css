@@ -131,9 +131,11 @@ body {
   position: absolute;
   top: 10%;
   border: none;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #04d8f5;
   width: 50%;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
-  background-color: none;
+  background-color: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
