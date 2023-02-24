@@ -105,6 +105,10 @@ body {
   margin: 5px;
 }
 
+marquee {
+  color: #ffcfa2;
+}
+
 .containerOne {
   display: flex;
   width: 70%;
