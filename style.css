@@ -150,18 +150,6 @@ body {
   border-radius: 20px;
 }
 
-/* #fade-out {
-  animation: fadeOut 1s ease-out forwards;
-  opacity: 1;
-} */
-
-/* animation: none;
-}
-
-.circle.animate {
-  animation: circle14512 60s linear infinite;
-} */
-
 .startBtn,
 .pauseBtn,
 .stopBtn {
@@ -189,6 +177,15 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: white;
+}
+
+.MotivationInput:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: rgb(255, 255, 255);
+  font-size: 15px;
 }
 
 button {
@@ -219,5 +216,36 @@ button:hover {
 
   100% {
     box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+    flex-direction: column;
+  }
+
+  .Content-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .SavedTasks {
+    width: 100%;
+  }
+
+  .loader {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .timerDisplay {
+    font-size: 23px;
+    top: 32%;
   }
 }
