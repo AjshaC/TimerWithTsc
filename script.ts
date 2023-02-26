@@ -109,9 +109,20 @@ function setTime(durations: number) {
       savedSettings = JSON.parse(CompletedTask);
     }
 
-    setTimeout(() => {
-      localStorage.removeItem("TaskComplitetd");
-    }, 12 * 60 * 60 * 1000);
+    function ClearDataFromLocalStorage() {
+      setTimeout(() => {
+        localStorage.removeItem("TaskComplitetd");
+        if (!localStorage.getItem("TaskComplitetd")) {
+          location.reload();
+        }
+      }, 12 * 60 * 60 * 1000); //5*1000 12 * 60 * 60 * 1000
+
+      // if (localStorage.getItem("TaskComplitetd") == null) {
+      //   location.reload();
+      // }
+    }
+
+    ClearDataFromLocalStorage();
 
     savedSettings.forEach((setting) => {
       if (!setting.stopped) {
@@ -209,7 +220,7 @@ function setTime(durations: number) {
   });
 
   thirtMinBtn.addEventListener("click", () => {
-    timer = 1800; //1800; //60 för att testa 1
+    timer = 30; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
 
     startBtn.style.opacity = "1";

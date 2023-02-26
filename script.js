@@ -80,9 +80,18 @@ function setTime(durations) {
         else {
             savedSettings = JSON.parse(CompletedTask);
         }
-        setTimeout(function () {
-            localStorage.removeItem("TaskComplitetd");
-        }, 12 * 60 * 60 * 1000);
+        function ClearDataFromLocalStorage() {
+            setTimeout(function () {
+                localStorage.removeItem("TaskComplitetd");
+                if (!localStorage.getItem("TaskComplitetd")) {
+                    location.reload();
+                }
+            }, 12 * 60 * 60 * 1000); //5*1000 12 * 60 * 60 * 1000
+            // if (localStorage.getItem("TaskComplitetd") == null) {
+            //   location.reload();
+            // }
+        }
+        ClearDataFromLocalStorage();
         savedSettings.forEach(function (setting) {
             if (!setting.stopped) {
                 var timeString = setting.hours < 60 ? "min" : "hour";
@@ -156,7 +165,7 @@ function setTime(durations) {
         startBtn.disabled = false;
     });
     thirtMinBtn.addEventListener("click", function () {
-        timer = 1800; //1800; //60 för att testa 1
+        timer = 30; //1800; //60 för att testa 1
         timerDisplay.innerHTML = "0h 30m 0s";
         startBtn.style.opacity = "1";
         startBtn.disabled = false;
