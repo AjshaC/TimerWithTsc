@@ -129,8 +129,11 @@ function setTime(durations: number) {
         const timeString = setting.hours < 60 ? "min" : "hour";
         const timeValue =
           setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
-        savedSettingsHTML += `<div class="task-Done">${timeValue} ${timeString} - ${setting.motivation}</div>`;
+        console.log(timeValue);
+        savedSettingsHTML += `<div class="task-Done"> ${setting.motivation}</div>`;
       }
+
+      //${timeValue} ${timeString} -
     });
 
     TaskSettings.innerHTML = savedSettingsHTML;
@@ -151,8 +154,12 @@ function setTime(durations: number) {
   }
 
   startBtn.addEventListener("click", () => {
-    interval = setInterval(timerUpdate, 1000);
     // breakBtn.style.opacity = "0";
+    if (!MotivationInput.value) {
+      MotivationInput.style.borderBottom = "2px solid pink";
+      return;
+    }
+    interval = setInterval(timerUpdate, 1000);
     containerOne.classList.add("animate");
     containerOne.classList.remove("animateFadeIn");
     MotivationInput.disabled = true;
@@ -165,7 +172,6 @@ function setTime(durations: number) {
       setting.stopped = false;
     });
 
-    console.log(savedSettings);
     disableDurationButtons(true, this);
   });
 
@@ -220,7 +226,7 @@ function setTime(durations: number) {
   });
 
   thirtMinBtn.addEventListener("click", () => {
-    timer = 30; //1800; //60 för att testa 1
+    timer = 1800; //1800; //60 för att testa 1
     timerDisplay.innerHTML = "0h 30m 0s";
 
     startBtn.style.opacity = "1";
@@ -231,5 +237,4 @@ function setTime(durations: number) {
   // breakBtn.innerHTML = breakBtn.innerHTML === "YES" ? "NO" : "YES";
   // });
 }
-
 setTime(30);

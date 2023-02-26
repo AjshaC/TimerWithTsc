@@ -8,7 +8,7 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
-
+  background-color: #151a26;
   font-family: "Arsenal", sans-serif;
 }
 
@@ -64,7 +64,7 @@ body {
 
 .timerDisplay {
   position: absolute;
-  top: 40%;
+  top: 45%;
   transform: translate(-50%, -50%);
   font-size: 35px;
   color: white;
@@ -72,7 +72,7 @@ body {
 
 .Content-container {
   width: 80%;
-
+  padding-top: 5%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -104,7 +104,7 @@ body {
 }
 
 marquee {
-  color: #ffcfa2;
+  color: pink;
 }
 
 .containerOne {
@@ -239,6 +239,7 @@ button:hover {
   .Content-container {
     width: 100%;
     min-height: 90%;
+    padding-top: 20%;
   }
 
   .SavedTasks {
@@ -257,7 +258,7 @@ button:hover {
 
   .timerDisplay {
     font-size: 23px;
-    top: 35%;
+    top: 39%;
   }
 
   button {

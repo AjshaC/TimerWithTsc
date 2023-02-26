@@ -96,8 +96,10 @@ function setTime(durations) {
             if (!setting.stopped) {
                 var timeString = setting.hours < 60 ? "min" : "hour";
                 var timeValue = setting.hours < 60 ? setting.hours : Math.floor(setting.hours / 60);
-                savedSettingsHTML += "<div class=\"task-Done\">".concat(timeValue, " ").concat(timeString, " - ").concat(setting.motivation, "</div>");
+                console.log(timeValue);
+                savedSettingsHTML += "<div class=\"task-Done\"> ".concat(setting.motivation, "</div>");
             }
+            //${timeValue} ${timeString} -
         });
         TaskSettings.innerHTML = savedSettingsHTML;
     }
@@ -111,8 +113,12 @@ function setTime(durations) {
         });
     }
     startBtn.addEventListener("click", function () {
-        interval = setInterval(timerUpdate, 1000);
         // breakBtn.style.opacity = "0";
+        if (!MotivationInput.value) {
+            MotivationInput.style.borderBottom = "2px solid pink";
+            return;
+        }
+        interval = setInterval(timerUpdate, 1000);
         containerOne.classList.add("animate");
         containerOne.classList.remove("animateFadeIn");
         MotivationInput.disabled = true;
@@ -122,7 +128,6 @@ function setTime(durations) {
         savedSettings.forEach(function (setting) {
             setting.stopped = false;
         });
-        console.log(savedSettings);
         disableDurationButtons(true, _this);
     });
     pauseBtn === null || pauseBtn === void 0 ? void 0 : pauseBtn.addEventListener("click", function () {
@@ -165,7 +170,7 @@ function setTime(durations) {
         startBtn.disabled = false;
     });
     thirtMinBtn.addEventListener("click", function () {
-        timer = 30; //1800; //60 för att testa 1
+        timer = 1800; //1800; //60 för att testa 1
         timerDisplay.innerHTML = "0h 30m 0s";
         startBtn.style.opacity = "1";
         startBtn.disabled = false;
